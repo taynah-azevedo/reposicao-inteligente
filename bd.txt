@@ -1,0 +1,29 @@
+CREATE DATABASE db_reposicaointeligente;
+USE db_reposicaointeligente;
+
+
+CREATE TABLE tb_requerimentos(
+	req_id INT primary key auto_increment,
+	req_dicente VARCHAR(255) not null,
+    req_docente VARCHAR(255) not null,
+    req_docente_email VARCHAR(255) not null,
+    req_dicente_email VARCHAR(255) not null,
+    req_disciplina VARCHAR(255) not null,
+    req_avaliacao VARCHAR(255) not null,
+    req_justificativa TEXT,
+    req_data_avaliacao DATE not null,
+    req_data_envio DATE DEFAULT(CURRENT_DATE),
+    req_anexo VARCHAR(255),
+    req_deferido INT default null
+) engine=InnoDB;
+SELECT * FROM tb_requerimentos;
+
+
+CREATE TABLE tb_deferidos(
+	def_id INT primary key auto_increment,
+	def_data_reposicao DATE not null,
+    def_observacao TEXT,
+    def_req_id INT not null,
+    FOREIGN KEY (def_req_id) REFERENCES tb_requerimentos(req_id)
+) engine = InnoDB;
+SELECT * FROM tb_deferidos;
